@@ -35,3 +35,5 @@ const pintarCarrito = () => {
     carrito.appendChild(fragment)
 }
 btnsBotones.forEach((btn) => btn.addEventListener('click', agregarAlCarrito))
+
+
