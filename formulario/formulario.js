@@ -49,7 +49,7 @@ formulario.addEventListener("submit", (e) => {
         // console.log("Nombre ingresado no valido");
         errores.push({
             tipo : alertName,
-            msg: "Formato no válido en el campo nombre, solo letras"
+            msg: "Formato no válido, ingrese solo letras."
         })
     }else{
         userName.classList.remove("is-invalid");
@@ -63,7 +63,7 @@ formulario.addEventListener("submit", (e) => {
         // console.log("correo no valido"); 
         errores.push({
             tipo : alertEmail,
-            msg: "Escriba un correo no válido"
+            msg: "Escriba un correo con formato válido (xxxx@xxx.xx)."
         });
     }else{
         alertEmail.classList.add("d-none");
