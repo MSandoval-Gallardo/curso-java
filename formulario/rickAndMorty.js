@@ -23,56 +23,59 @@ const fetchData = async (url = "https://rickandmortyapi.com/api/character") => {
 
 // se pinta cada card
 const pintarCard = (data) => {
-    const card = document.getElementById("card-dinamicas")
-    card.textContent = "";
+    const cards = document.getElementById("card-dinamicas")
+    cards.textContent = "";
     const templateCard = document.getElementById("template-card").content
     const fragment = document.createDocumentFragment()
     
-    data.results.forEach(item => {
-        const clone = templateCard.cloneNode(true)
-        clone.querySelector("h5").textContent = item.name
-        clone.querySelector("p").textContent = item.species
-        clone.querySelector("img").setAttribute("src", item.image)
+    data.results.forEach((item) => {
+        const clone = templateCard.cloneNode(true);
+        clone.querySelector("h5").textContent = item.name;
+        clone.querySelector("p").textContent = item.species;
+        clone.querySelector(".card-img-top").setAttribute("src", item.image);
+        
 
         // guardamos en el fragment para evitar el reflow
         fragment.appendChild(clone)
     });
-    card.appendChild(fragment)
+    cards.appendChild(fragment)
     pintarPaginacion(data.info)
 }
 const pintarPaginacion = (data) => {
-    console.log(data)
+    // console.log(data)
     const paginacion = document.getElementById("paginacion")
-    const templatePaginacion = document.getElementById("template-paginacion").content
     paginacion.textContent = "";
-    const clone = templatePaginacion.cloneNode(true)
+    const templatePaginacion = document.getElementById("template-paginacion").content;
+    const clone = templatePaginacion.cloneNode(true);
+
     if(data.prev){
-        clone.querySelector(".btn-outline-secondary").disabled = false
+        clone.querySelector(".btn-outline-secondary").disabled = false;
     }else{
-        clone.querySelector(".btn-outline-secondary").disabled = true
+        clone.querySelector(".btn-outline-secondary").disabled = true;
     }
 
     if(data.next){
-        clone.querySelector(".btn-outline-primary").disabled = false
+        clone.querySelector(".btn-outline-primary").disabled = false;
     }else{
-        clone.querySelector(".btn-outline-primary").disabled = true
+        clone.querySelector(".btn-outline-primary").disabled = true;
     }
 
-    paginacion.appendChild(clone)
+    paginacion.appendChild(clone);
 
-    paginacion.addEventListener("click", e => {
+    paginacion.addEventListener("click", (e) => {
         if(e.target.matches(".btn-outline-primary")){
             if(data.next){
-                fetchData(data.next)
+                fetchData(data.next);
             }
         }
         if(e.target.matches(".btn-outline-secondary")){
             if(data.prev){
-                fetchData(data.prev)
+                fetchData(data.prev);
             }
 
         }
     })
+
 
 }
 // se pinta el loading
